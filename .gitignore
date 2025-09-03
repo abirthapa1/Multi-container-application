@@ -14,6 +14,7 @@
 # testing
 /coverage
 /backend/example.http
+
 # next.js
 /.next/
 /out/
@@ -40,3 +41,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+#terraform
+/terraform/.terraform
+/terraform/.terraform.lock.hcl
