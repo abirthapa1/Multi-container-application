@@ -1,0 +1,82 @@
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+/* CSS for navbar */
+.user-png {
+  width: 25px;
+  height: 25px;
+}
+
+.btn-nav {
+  background-color: dodgerblue;
+  border-radius: 1em;
+}
+
+/* CSS for About */
+.about {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* CSS for todo */
+.to-do-inputs {
+  outline: 0;
+}
+.to-do-input-div {
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+#textarea {
+  display: none;
+}
+
+/* CSS for Todo */
+.todo-update {
+  width: 100%;
+  height: 80vh;
+  position: fixed;
+  position: absolute;
+  top: 80px;
+  left: 0px;
+  background-color: blanchedalmond;
+  display: none;
+}
+/* CSS for TodoCard */
+.card-icons {
+  font-size: 18px;
+  cursor: pointer;
+}
+.card-icons:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
