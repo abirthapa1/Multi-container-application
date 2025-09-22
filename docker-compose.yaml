@@ -2,11 +2,11 @@ version: "2.34"
 
 services:
   frontend:
-    build: ./frontend
+    image: abirthapa1/todo-list-frontend
     ports:
       - 3000:3000
   backend:
-    build: ./backend
+    image: abirthapa1/todo-list-backend
     ports:
       - 3001:3001
     environment:
