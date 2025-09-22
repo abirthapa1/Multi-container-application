@@ -32,6 +32,10 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: ./backend
+          context: |
+            ./backend
+            ./frontend
           push: true
-          tags: abirthapa1/todo-list-backend:1.01
+          tags: |
+            abirthapa1/todo-list-backend:1.01
+            abirthapa1/todo-list-frontend:1.01
