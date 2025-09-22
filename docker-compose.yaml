@@ -1,0 +1,22 @@
+version: "2.34"
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - 3000:3000
+  backend:
+    build: ./backend
+    ports:
+      - 3001:3001
+    environment:
+      DB_URL: mongodb://db/todo
+  database:
+    image: mongo:8.0-rc-noble
+    ports:
+      - 27018:27017
+    volumes:
+      - todo:/data/db
+
+volumes:
+  todo:
