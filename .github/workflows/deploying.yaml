@@ -32,6 +32,7 @@ jobs:
 
   web-server:
     name: "Running the container application"
+    needs: [Ansible]
     runs-on: ubuntu-latest
 
     steps:
