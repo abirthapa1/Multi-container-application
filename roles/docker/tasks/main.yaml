@@ -1,0 +1,50 @@
+---
+- name: Updating all the packages
+  tags: docker
+  ansible.builtin.yum:
+    name: "*"
+    state: latest
+  become: true
+
+- name: Installing docker
+  tags: docker
+  become: true
+  ansible.builtin.yum:
+    pkg:
+      - docker
+    state: latest
+    update_cache: true
+
+- name: Starting the docker service
+  tags: docker
+  become: true
+  ansible.builtin.service:
+    name: docker
+    state: reloaded
+
+# install docker plugin
+- name: Installing docker plugin
+  become: true
+  tags: docker
+  ansible.builtin.get_url:
+    url: "https://github.com/docker/compose/releases/download/v2.38.2/docker-compose-{{ansible_system}}-{{ansible_architecture}}"
+    dest: /usr/local/bin/docker-compose
+    mode: "0755"
+# - name: Tear down existing services
+#   tags: docker
+#   become: true
+#   community.docker.docker_compose_v2:
+#     project_src: /home/ec2-user
+#     state: absent
+
+# - name: Create and start services
+#   tags: docker
+#   become: true
+#   community.docker.docker_compose_v2:
+#     project_src: /home/abirthapa
+#   register: output
+
+# - name: Show results
+#   tags: docker
+#   ansible.builtin.debug:
+#     var: output
