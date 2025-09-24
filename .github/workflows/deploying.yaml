@@ -73,4 +73,5 @@ jobs:
           key: ${{secrets.SSH_KEY}}
           script: |
             curl -fsSL https://raw.githubusercontent.com/abirthapa1/Multi-container-application/refs/heads/main/docker-compose.yaml -O docker-compose.yaml
+            docker login -u ${{secrets.DOCKERHUB_USER}} -p ${{secrets.DOCKERHUB_TOKEN}}
             docker-compose up -d --build
