@@ -1,5 +1,5 @@
 ---
-name: "deploying the docker file"
+name: "Deploying the docker compose"
 
 on:
   push:
@@ -9,6 +9,27 @@ on:
   workflow_dispatch:
 
 jobs:
+  Ansible:
+    name: "Installing docker and docker compose plugin in the server"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checking out the repository"
+        uses: actions/checkout@v4
+
+      - name: "Installing ansible"
+        run: sudo apt-get update -y && sudo apt-get install -y ansible
+
+      - name: "Setup SSH Ansible"
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: "Running the playbook"
+        run: ansible-playbook -i hosts.ini setup-server.yaml
+
   web-server:
     name: "Running the container application"
     runs-on: ubuntu-latest
@@ -34,11 +55,21 @@ jobs:
         with:
           context: ./backend
           push: true
-          tags: abirthapa1/todo-list-backend:1.01
+          tags: abirthapa1/todo-list-backend:${{github.sha}}
 
       - name: Build and push frontend
         uses: docker/build-push-action@v6
         with:
           context: ./frontend
           push: true
-          tags: abirthapa1/todo-list-frontend:1.01
+          tags: abirthapa1/todo-list-frontend:${{github.sha}}
+
+      - name: "SSHing and runniong the compose file"
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{secrets.SSH_HOST}}
+          username: abirthapa
+          key: ${{secrets.SSH_KEY}}
+          script: |
+            curl -fsSL https://raw.githubusercontent.com/abirthapa1/Multi-container-application/refs/heads/main/docker-compose.yaml -O docker-compose.yaml
+            docker-compose up -d --build
