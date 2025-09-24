@@ -28,7 +28,7 @@ jobs:
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
       - name: "Running the playbook"
-        run: ansible-playbook -i hosts.ini setup-server.yaml
+        run: ansible-playbook -i ${{secrets.SSH_HOST}} setup-server.yaml
 
   web-server:
     name: "Running the container application"
@@ -68,7 +68,7 @@ jobs:
         uses: appleboy/ssh-action@v1
         with:
           host: ${{secrets.SSH_HOST}}
-          username: abirthapa
+          username: ec2-user
           key: ${{secrets.SSH_KEY}}
           script: |
             curl -fsSL https://raw.githubusercontent.com/abirthapa1/Multi-container-application/refs/heads/main/docker-compose.yaml -O docker-compose.yaml
