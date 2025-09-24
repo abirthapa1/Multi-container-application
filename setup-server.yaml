@@ -1,6 +1,6 @@
 ---
 - name: "Setting up the server"
   hosts: web_server
-  remote_user: abirthapa
+  remote_user: ec2-user
   roles:
     - docker
