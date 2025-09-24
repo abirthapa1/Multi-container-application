@@ -28,7 +28,7 @@ jobs:
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
       - name: "Running the playbook"
-        run: ansible-playbook -i ${{secrets.SSH_HOST}} setup-server.yaml
+        run: ansible-playbook setup-server.yaml -i "${{secrets.SSH_HOST}},"
 
   web-server:
     name: "Running the container application"
