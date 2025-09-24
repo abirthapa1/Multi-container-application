@@ -22,6 +22,14 @@
     name: docker
     state: reloaded
 
+  #add the user tot the docker group
+- name: Adding the user to the docker group
+  become: true
+  ansible.builtin.user:
+    name: ec2-user
+    groups: docker
+    append: yes
+
 # install docker plugin
 - name: Installing docker plugin
   become: true
