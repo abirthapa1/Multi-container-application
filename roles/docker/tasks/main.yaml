@@ -30,8 +30,8 @@
     groups: docker
     append: yes
 
-# install docker plugin
-- name: Installing docker plugin
+# install docker-compose plugin
+- name: Installing docker-compose plugin
   become: true
   tags: docker
   ansible.builtin.get_url:
